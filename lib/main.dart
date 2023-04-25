@@ -178,31 +178,145 @@ class ExplorePage extends StatefulWidget {
 }
 
 class _ExplorePageState extends State<ExplorePage> {
-  String _message = 'Welcome to the Explore page!';
-
-  void _changeMessage() {
-    setState(() {
-      _message = 'You tapped the button!';
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Explore Page'),
+    return MaterialApp(
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(_message),
-            SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: _changeMessage,
-              child: Text('Tap me!'),
-            ),
-          ],
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('My App'),
+        ),
+        body: SingleChildScrollView(
+          padding: EdgeInsets.all(20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Doctors',
+                textAlign: TextAlign.start,
+                style: TextStyle(fontSize: 24),
+              ),
+              SizedBox(height: 20),
+              Row(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                    child: Container(
+                      width: 150,
+                      height: 150,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5),
+                        border: Border.all(
+                          color: Colors.grey,
+                          width: 2,
+                        ),
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          CircleAvatar(
+                            backgroundColor: Colors.blue,
+                            radius: 40,
+                            child: Text(
+                              'DR',
+                              style: TextStyle(
+                                fontSize: 30,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                          SizedBox(height: 10),
+                          Text(
+                            'John Doe',
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                    child: Container(
+                      width: 150,
+                      height: 150,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5),
+                        border: Border.all(
+                          color: Colors.grey,
+                          width: 2,
+                        ),
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          CircleAvatar(
+                            backgroundColor: Colors.red,
+                            radius: 40,
+                            child: Text(
+                              'DR',
+                              style: TextStyle(
+                                fontSize: 30,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                          SizedBox(height: 10),
+                          Text(
+                            'Jane Smith',
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 40),
+              Text(
+                'Your Appointments',
+                style: TextStyle(fontSize: 24),
+              ),
+              SizedBox(height: 20),
+              Card(
+                child: ListTile(
+                  leading: Icon(Icons.calendar_today),
+                  title: Text('Appointment 1'),
+                  subtitle: Text('Doctor: John Doe'),
+                  trailing: Icon(Icons.arrow_forward),
+                  onTap: () {},
+                ),
+              ),
+              SizedBox(height: 10),
+              Card(
+                child: ListTile(
+                  leading: Icon(Icons.calendar_today),
+                  title: Text('Appointment 2'),
+                  subtitle: Text('Doctor: Jane Smith'),
+                  trailing: Icon(Icons.arrow_forward),
+                  onTap: () {},
+                ),
+              ),
+              SizedBox(height: 10),
+              Card(
+                child: ListTile(
+                  leading: Icon(Icons.calendar_today),
+                  title: Text('Appointment 3'),
+                  subtitle: Text('Doctor: John Doe'),
+                  trailing: Icon(Icons.arrow_forward),
+                  onTap: () {},
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -248,12 +362,14 @@ class _NotificationsPageState extends State<NotificationsPage> {
                 ),
               ),
               SizedBox(height: 10),
-              ElevatedButton.icon(
-                onPressed: () {},
-                label: Text('OK'),
-                icon: Icon(Icons.check),
-                style: ElevatedButton.styleFrom(
-                  primary: Colors.green,
+              Center(
+                child: ElevatedButton.icon(
+                  onPressed: () {},
+                  label: Text('OK'),
+                  icon: Icon(Icons.check),
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.green,
+                  ),
                 ),
               ),
               SizedBox(height: 20),
