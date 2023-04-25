@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "566933337896",
+    "project_id": "gomedic-1c46f",
+    "storage_bucket": "gomedic-1c46f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:566933337896:android:0f420e0bc8c42e12b8421d",
+        "android_client_info": {
+          "package_name": "com.example.gomedic"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "566933337896-l89rlngdd5b9sjjbu9aas0nk4sin0nsb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCWCMWaoecYONTkR-ydofsl-qRamUGcmIs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "566933337896-l89rlngdd5b9sjjbu9aas0nk4sin0nsb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

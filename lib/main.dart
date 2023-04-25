@@ -48,16 +48,16 @@ class _BottomNavBarState extends State<BottomNavBar> {
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.explore),
-            label: 'Explore',
+            icon: Icon(Icons.calendar_today_outlined),
+            label: 'appointment',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.medication),
             label: 'Medication',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Profile',
+            icon: Icon(Icons.local_pizza_outlined),
+            label: 'Diet',
           ),
         ],
       ),
