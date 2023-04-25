@@ -181,13 +181,13 @@ class _ExplorePageState extends State<ExplorePage> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Appointment',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
       home: Scaffold(
         appBar: AppBar(
-          title: Text('My App'),
+          title: Text('Appointment'),
         ),
         body: SingleChildScrollView(
           padding: EdgeInsets.all(20),
@@ -477,137 +477,106 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  final List<String> days = [
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday',
+    'Sunday'
+  ];
+
+  String selectedDay = '';
+  String selectedSubtitle = '';
+
+  void _changeSubtitle() {
+    setState(() {
+      selectedSubtitle = _subtitleController.text;
+    });
+  }
+
+  final TextEditingController _dayController = TextEditingController();
+  final TextEditingController _subtitleController = TextEditingController();
+
+  @override
+  void dispose() {
+    _dayController.dispose();
+    _subtitleController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('My Medications'),
-        backgroundColor: Colors.green,
-      ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.all(16.0),
+    return MaterialApp(
+      title: 'Diet',
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('Diet'),
+          backgroundColor: Colors.green,
+        ),
+        body: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: 20),
-              Text(
-                'Medications',
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-              ),
-              SizedBox(height: 20),
-              TextField(
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'Medication name',
+              Padding(
+                padding: EdgeInsets.all(16.0),
+                child: Text(
+                  'Your diet plan for the week',
+                  style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
                 ),
               ),
-              SizedBox(height: 10),
-              TextField(
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'Dose',
-                ),
-              ),
-              SizedBox(height: 10),
-              ElevatedButton.icon(
-                onPressed: () {},
-                label: Text('OK'),
-                icon: Icon(Icons.check),
-                style: ElevatedButton.styleFrom(
-                  primary: Colors.green,
-                ),
-              ),
-              SizedBox(height: 20),
-              Card(
+              Padding(
+                padding: EdgeInsets.all(16.0),
                 child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    ListTile(
-                      leading: Icon(Icons.album),
-                      title: Text('Medication Name'),
-                      subtitle: Text('Dose: 1 pill'),
+                  children: [
+                    TextField(
+                      controller: _dayController,
+                      decoration: InputDecoration(
+                        hintText: 'Enter the day',
+                        labelText: 'Day',
+                      ),
+                      onChanged: (value) {
+                        setState(() {
+                          selectedDay = value;
+                        });
+                      },
+                    ),
+                    TextField(
+                      controller: _subtitleController,
+                      decoration: InputDecoration(
+                        hintText: 'Enter the Diet',
+                        labelText: 'Diet Description',
+                      ),
+                    ),
+                    SizedBox(height: 16.0),
+                    ElevatedButton(
+                      onPressed: _changeSubtitle,
+                      child: Text('Change Diet'),
                     ),
                   ],
                 ),
               ),
-              SizedBox(height: 10),
-              Card(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    ListTile(
-                      leading: Icon(Icons.album),
-                      title: Text('Medication Name'),
-                      subtitle: Text('Dose: 1 pill'),
+              ListView.builder(
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+                itemCount: days.length,
+                itemBuilder: (context, index) {
+                  return Card(
+                    child: ListTile(
+                      title: Text(days[index]),
+                      subtitle: Text(selectedDay == days[index]
+                          ? selectedSubtitle.isNotEmpty
+                              ? selectedSubtitle
+                              : 'Diet plan for $selectedDay'
+                          : 'Diet plan for ${days[index]}'),
+                      trailing: Checkbox(
+                        value: false,
+                        onChanged: (bool? value) {},
+                      ),
                     ),
-                  ],
-                ),
-              ),
-              SizedBox(height: 10),
-              Card(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    ListTile(
-                      leading: Icon(Icons.album),
-                      title: Text('Medication Name'),
-                      subtitle: Text('Dose: 1 pill'),
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(height: 10),
-              Card(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    ListTile(
-                      leading: Icon(Icons.album),
-                      title: Text('Medication Name'),
-                      subtitle: Text('Dose: 1 pill'),
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(height: 10),
-              Card(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    ListTile(
-                      leading: Icon(Icons.album),
-                      title: Text('Medication Name'),
-                      subtitle: Text('Dose: 1 pill'),
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(height: 10),
-              Card(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    ListTile(
-                      leading: Icon(Icons.album),
-                      title: Text('Medication Name'),
-                      subtitle: Text('Dose: 1 pill'),
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(height: 10),
-              Card(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    ListTile(
-                      leading: Icon(Icons.album),
-                      title: Text('Medication Name'),
-                      subtitle: Text('Dose: 1 pill'),
-                    ),
-                  ],
-                ),
+                  );
+                },
               ),
             ],
           ),
