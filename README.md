@@ -33,5 +33,5 @@ Flutter and Firebase
 ![Home page](images/homepage.png)
 ![Appointment page](images/Appointment.png)
 ![Medication](images/medication.png)
-![Dietpage](images/dietpage.png)
+![Dietpage](images/diet.png)
 
