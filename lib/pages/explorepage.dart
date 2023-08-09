@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class ExplorePage extends StatefulWidget {
+  const ExplorePage({super.key});
+
   @override
   _ExplorePageState createState() => _ExplorePageState();
 }
@@ -15,23 +17,23 @@ class _ExplorePageState extends State<ExplorePage> {
       ),
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Appointment'),
+          title: const Text('Appointment'),
         ),
         body: SingleChildScrollView(
-          padding: EdgeInsets.all(20),
+          padding: const EdgeInsets.all(20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
+              const Text(
                 'Doctors',
                 textAlign: TextAlign.start,
                 style: TextStyle(fontSize: 24),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Row(
                 children: [
                   Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                     child: Container(
                       width: 150,
                       height: 150,
@@ -42,7 +44,7 @@ class _ExplorePageState extends State<ExplorePage> {
                           width: 2,
                         ),
                       ),
-                      child: Column(
+                      child: const Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           CircleAvatar(
@@ -69,7 +71,7 @@ class _ExplorePageState extends State<ExplorePage> {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                     child: Container(
                       width: 150,
                       height: 150,
@@ -80,7 +82,7 @@ class _ExplorePageState extends State<ExplorePage> {
                           width: 2,
                         ),
                       ),
-                      child: Column(
+                      child: const Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           CircleAvatar(
@@ -108,38 +110,38 @@ class _ExplorePageState extends State<ExplorePage> {
                   ),
                 ],
               ),
-              SizedBox(height: 40),
-              Text(
+              const SizedBox(height: 40),
+              const Text(
                 'Your Appointments',
                 style: TextStyle(fontSize: 24),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Card(
                 child: ListTile(
-                  leading: Icon(Icons.calendar_today),
-                  title: Text('Appointment 1'),
-                  subtitle: Text('Doctor: John Doe'),
-                  trailing: Icon(Icons.arrow_forward),
+                  leading: const Icon(Icons.calendar_today),
+                  title: const Text('Appointment 1'),
+                  subtitle: const Text('Doctor: John Doe'),
+                  trailing: const Icon(Icons.arrow_forward),
                   onTap: () {},
                 ),
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Card(
                 child: ListTile(
-                  leading: Icon(Icons.calendar_today),
-                  title: Text('Appointment 2'),
-                  subtitle: Text('Doctor: Jane Smith'),
-                  trailing: Icon(Icons.arrow_forward),
+                  leading: const Icon(Icons.calendar_today),
+                  title: const Text('Appointment 2'),
+                  subtitle: const Text('Doctor: Jane Smith'),
+                  trailing: const Icon(Icons.arrow_forward),
                   onTap: () {},
                 ),
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Card(
                 child: ListTile(
-                  leading: Icon(Icons.calendar_today),
-                  title: Text('Appointment 3'),
-                  subtitle: Text('Doctor: John Doe'),
-                  trailing: Icon(Icons.arrow_forward),
+                  leading: const Icon(Icons.calendar_today),
+                  title: const Text('Appointment 3'),
+                  subtitle: const Text('Doctor: John Doe'),
+                  trailing: const Icon(Icons.arrow_forward),
                   onTap: () {},
                 ),
               ),

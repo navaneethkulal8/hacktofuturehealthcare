@@ -1,70 +1,50 @@
 import 'package:flutter/material.dart';
-import 'package:gomedic/pages/explorepage.dart';
-import 'package:gomedic/pages/homepage.dart';
-import 'package:gomedic/pages/navigationpage.dart';
-import 'package:gomedic/pages/profilepage.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:gomedic/pages/controllerpage.dart';
+import 'package:gomedic/pages/loginpage.dart';
+import 'package:gomedic/pages/createaccount.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(title: 'My App', home: BottomNavBar());
-  }
-}
-
-class BottomNavBar extends StatefulWidget {
-  @override
-  _BottomNavBarState createState() => _BottomNavBarState();
-}
-
-class _BottomNavBarState extends State<BottomNavBar> {
-  int _currentIndex = 0;
-  final List<Widget> _pages = [
-    HomePage(),
-    ExplorePage(),
-    NotificationsPage(),
-    ProfilePage(),
-  ];
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: _pages[_currentIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentIndex,
-        onTap: (int index) {
-          setState(() {
-            _currentIndex = index;
-          });
-        },
-        selectedIconTheme: IconThemeData(
-          color: Colors.blue,
-        ),
-        unselectedIconTheme: IconThemeData(
-          color: Colors.grey[400],
-        ),
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.calendar_today_outlined),
-            label: 'appointment',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.medication),
-            label: 'Medication',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.local_pizza_outlined),
-            label: 'Diet',
-          ),
-        ],
-      ),
+    return MaterialApp(
+      title: 'Gomedic',
+      home: AuthWrapper(),
     );
   }
 }
+
+class AuthWrapper extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return StreamBuilder<User?>(
+      stream: FirebaseAuth.instance.authStateChanges(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.active) {
+          final user = snapshot.data;
+          if (user != null) {
+            // User is logged in, navigate to the ControllerPage.
+            return ControllerPage();
+          } else {
+            // User is not logged in, show the LoginPage.
+            return LoginPage();
+          }
+        } else {
+          // Show a loading indicator or splash screen while checking the user's authentication state.
+          return Scaffold(
+            body: Center(
+              child: CircularProgressIndicator(),
+            ),
+          );
+        }
+      },
+    );
+  }
+}
+

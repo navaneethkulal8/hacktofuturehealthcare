@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class NotificationsPage extends StatefulWidget {
+  const NotificationsPage({super.key});
+
   @override
   _NotificationsPageState createState() => _NotificationsPageState();
 }
@@ -10,47 +12,47 @@ class _NotificationsPageState extends State<NotificationsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('My Medications'),
+        title: const Text('My Medications'),
         backgroundColor: Colors.green,
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(16.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: 20),
-              Text(
+              const SizedBox(height: 20),
+              const Text(
                 'Medications',
                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
-              SizedBox(height: 20),
-              TextField(
+              const SizedBox(height: 20),
+              const TextField(
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   labelText: 'Medication name',
                 ),
               ),
-              SizedBox(height: 10),
-              TextField(
+              const SizedBox(height: 10),
+              const TextField(
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   labelText: 'Dose',
                 ),
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Center(
                 child: ElevatedButton.icon(
                   onPressed: () {},
-                  label: Text('OK'),
-                  icon: Icon(Icons.check),
+                  label: const Text('OK'),
+                  icon: const Icon(Icons.check),
                   style: ElevatedButton.styleFrom(
-                    primary: Colors.green,
+                    backgroundColor: Colors.green,
                   ),
                 ),
               ),
-              SizedBox(height: 20),
-              Card(
+              const SizedBox(height: 20),
+              const Card(
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
@@ -62,8 +64,8 @@ class _NotificationsPageState extends State<NotificationsPage> {
                   ],
                 ),
               ),
-              SizedBox(height: 10),
-              Card(
+              const SizedBox(height: 10),
+              const Card(
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
@@ -75,8 +77,8 @@ class _NotificationsPageState extends State<NotificationsPage> {
                   ],
                 ),
               ),
-              SizedBox(height: 10),
-              Card(
+              const SizedBox(height: 10),
+              const Card(
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
@@ -88,8 +90,8 @@ class _NotificationsPageState extends State<NotificationsPage> {
                   ],
                 ),
               ),
-              SizedBox(height: 10),
-              Card(
+              const SizedBox(height: 10),
+              const Card(
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
@@ -101,8 +103,8 @@ class _NotificationsPageState extends State<NotificationsPage> {
                   ],
                 ),
               ),
-              SizedBox(height: 10),
-              Card(
+              const SizedBox(height: 10),
+              const Card(
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
@@ -114,8 +116,8 @@ class _NotificationsPageState extends State<NotificationsPage> {
                   ],
                 ),
               ),
-              SizedBox(height: 10),
-              Card(
+              const SizedBox(height: 10),
+              const Card(
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
@@ -127,8 +129,8 @@ class _NotificationsPageState extends State<NotificationsPage> {
                   ],
                 ),
               ),
-              SizedBox(height: 10),
-              Card(
+              const SizedBox(height: 10),
+              const Card(
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[

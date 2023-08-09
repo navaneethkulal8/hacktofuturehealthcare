@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class ProfilePage extends StatefulWidget {
+  const ProfilePage({super.key});
+
   @override
   _ProfilePageState createState() => _ProfilePageState();
 }
@@ -41,14 +43,14 @@ class _ProfilePageState extends State<ProfilePage> {
       title: 'Diet',
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Diet'),
+          title: const Text('Diet'),
           backgroundColor: Colors.green,
         ),
         body: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(
+              const Padding(
                 padding: EdgeInsets.all(16.0),
                 child: Text(
                   'Your diet plan for the week',
@@ -56,12 +58,12 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.all(16.0),
+                padding: const EdgeInsets.all(16.0),
                 child: Column(
                   children: [
                     TextField(
                       controller: _dayController,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         hintText: 'Enter the day',
                         labelText: 'Day',
                       ),
@@ -73,22 +75,22 @@ class _ProfilePageState extends State<ProfilePage> {
                     ),
                     TextField(
                       controller: _subtitleController,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         hintText: 'Enter the Diet',
                         labelText: 'Diet Description',
                       ),
                     ),
-                    SizedBox(height: 16.0),
+                    const SizedBox(height: 16.0),
                     ElevatedButton(
                       onPressed: _changeSubtitle,
-                      child: Text('Change Diet'),
+                      child: const Text('Change Diet'),
                     ),
                   ],
                 ),
               ),
               ListView.builder(
                 shrinkWrap: true,
-                physics: NeverScrollableScrollPhysics(),
+                physics: const NeverScrollableScrollPhysics(),
                 itemCount: days.length,
                 itemBuilder: (context, index) {
                   return Card(
