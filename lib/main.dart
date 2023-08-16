@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 // import 'package:gomedic/pages/controllerpage.dart';
 // import 'package:gomedic/pages/loginpage.dart';
 // import 'package:gomedic/pages/createaccount.dart';
-import 'package:gomedic/pages/profilepage.dart';
+import 'package:gomedic/pages/explorepage.dart';
 
 void main() {
   runApp(const MyApp());
@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
 class AuthWrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return const ProfilePage(); // Display the HomePage directly
+    return const ExplorePage(); // Display the HomePage directly
   }
 }
 
