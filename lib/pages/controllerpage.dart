@@ -25,6 +25,7 @@ class _ControllerPageState extends State<ControllerPage> {
     return Scaffold(
       body: _pages[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed, // Display labels below icons
         currentIndex: _currentIndex,
         onTap: (int index) {
           setState(() {
@@ -44,7 +45,7 @@ class _ControllerPageState extends State<ControllerPage> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.calendar_today_outlined),
-            label: 'appointment',
+            label: 'Appointment',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.medication),
