@@ -24,38 +24,69 @@ class _ControllerPageState extends State<ControllerPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: _pages[_currentIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed, // Display labels below icons
-        currentIndex: _currentIndex,
-        onTap: (int index) {
-          setState(() {
-            _currentIndex = index;
-          });
-        },
-        selectedIconTheme: const IconThemeData(
-          color: Colors.blue,
+      bottomNavigationBar: BottomAppBar(
+        color: Colors.white,
+        elevation: 8.0,
+        shape: CircularNotchedRectangle(),
+        child: Container(
+          decoration: BoxDecoration(
+            color: Colors.white,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.3),
+                blurRadius: 10,
+                spreadRadius: 5,
+                offset: Offset(0, 3),
+              ),
+            ],
+          ),
+          height: 60,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              buildNavItem(Icons.home, "Home", 0),
+              buildNavItem(Icons.calendar_today, "Calendar", 1),
+              buildNavItem(Icons.medication, "Medication", 2),
+              buildNavItem(Icons.person, "Profile", 3),
+            ],
+          ),
         ),
-        unselectedIconTheme: IconThemeData(
-          color: Colors.grey[400],
+      ),
+    );
+  }
+
+  Widget buildNavItem(IconData icon, String label, int index) {
+    final isSelected = _currentIndex == index;
+
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          _currentIndex = index;
+        });
+      },
+      child: Container(
+        width: 60,
+        height: 60,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              icon,
+              color: isSelected ? Colors.black : Colors.grey,
+            ),
+            SizedBox(height: 2),
+            Text(
+              label,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: isSelected ? Colors.black : Colors.grey,
+                fontWeight: FontWeight.bold,
+                fontSize: 10, // Adjust the font size
+                height: 1, // Adjust the line height
+              ),
+            ),
+          ],
         ),
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.calendar_today_outlined),
-            label: 'Appointment',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.medication),
-            label: 'Medication',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.local_pizza_outlined),
-            label: 'Diet',
-          ),
-        ],
       ),
     );
   }
