@@ -14,7 +14,7 @@ class ControllerPage extends StatefulWidget {
 class _ControllerPageState extends State<ControllerPage> {
   int _currentIndex = 0;
   final List<Widget> _pages = [
-    const HomePage(),
+    HomePage(),
     const ExplorePage(),
     const NotificationsPage(),
     const ProfilePage(),
