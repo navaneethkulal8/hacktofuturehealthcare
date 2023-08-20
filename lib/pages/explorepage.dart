@@ -24,130 +24,130 @@ class _ExplorePageState extends State<ExplorePage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                'Doctors',
-                textAlign: TextAlign.start,
-                style: TextStyle(fontSize: 24),
+              // Search Bar with Filter Icon
+              Padding(
+                padding: const EdgeInsets.only(bottom: 10),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: TextFormField(
+                        decoration: InputDecoration(
+                          hintText: 'Search for doctors...',
+                          prefixIcon: Icon(Icons.search),
+                          suffixIcon: Icon(Icons.filter_list),
+                          border: OutlineInputBorder(),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 10),
+              // Previously Consulted Doctors
+              Text(
+                'Your Previous Doctors',
+                style: TextStyle(fontSize: 18),
+              ),
+              const SizedBox(height: 5), // Add space between title and avatars
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: [
+                    DoctorAvatar(
+                        name: 'John Doe', specialization: 'Cardiologist'),
+                    DoctorAvatar(
+                        name: 'Jane Smith', specialization: 'Dermatologist'),
+                    // Add more DoctorAvatar widgets here as needed
+                  ],
+                ),
               ),
               const SizedBox(height: 20),
-              Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                    child: Container(
-                      width: 150,
-                      height: 150,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(5),
-                        border: Border.all(
-                          color: Colors.grey,
-                          width: 2,
-                        ),
-                      ),
-                      child: const Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          CircleAvatar(
-                            backgroundColor: Colors.blue,
-                            radius: 40,
-                            child: Text(
-                              'DR',
-                              style: TextStyle(
-                                fontSize: 30,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
-                          SizedBox(height: 10),
-                          Text(
-                            'John Doe',
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                    child: Container(
-                      width: 150,
-                      height: 150,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(5),
-                        border: Border.all(
-                          color: Colors.grey,
-                          width: 2,
-                        ),
-                      ),
-                      child: const Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          CircleAvatar(
-                            backgroundColor: Colors.red,
-                            radius: 40,
-                            child: Text(
-                              'DR',
-                              style: TextStyle(
-                                fontSize: 30,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
-                          SizedBox(height: 10),
-                          Text(
-                            'Jane Smith',
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 40),
-              const Text(
+              // Your Appointments
+              Text(
                 'Your Appointments',
-                style: TextStyle(fontSize: 24),
-              ),
-              const SizedBox(height: 20),
-              Card(
-                child: ListTile(
-                  leading: const Icon(Icons.calendar_today),
-                  title: const Text('Appointment 1'),
-                  subtitle: const Text('Doctor: John Doe'),
-                  trailing: const Icon(Icons.arrow_forward),
-                  onTap: () {},
-                ),
+                style: TextStyle(fontSize: 18),
               ),
               const SizedBox(height: 10),
-              Card(
-                child: ListTile(
-                  leading: const Icon(Icons.calendar_today),
-                  title: const Text('Appointment 2'),
-                  subtitle: const Text('Doctor: Jane Smith'),
-                  trailing: const Icon(Icons.arrow_forward),
-                  onTap: () {},
-                ),
-              ),
+              AppointmentCard(title: 'Appointment 1', doctor: 'John Doe'),
               const SizedBox(height: 10),
-              Card(
-                child: ListTile(
-                  leading: const Icon(Icons.calendar_today),
-                  title: const Text('Appointment 3'),
-                  subtitle: const Text('Doctor: John Doe'),
-                  trailing: const Icon(Icons.arrow_forward),
-                  onTap: () {},
-                ),
-              ),
+              AppointmentCard(title: 'Appointment 2', doctor: 'Jane Smith'),
+              const SizedBox(height: 10),
+              AppointmentCard(title: 'Appointment 3', doctor: 'John Doe'),
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class DoctorAvatar extends StatelessWidget {
+  final String name;
+  final String specialization;
+
+  const DoctorAvatar({
+    required this.name,
+    required this.specialization,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 10),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          SizedBox(height: 10), // Add space between title and avatar
+          CircleAvatar(
+            backgroundColor: Colors.blue,
+            radius: 30,
+            child: Text(
+              'DR',
+              style: TextStyle(
+                fontSize: 20,
+                color: Colors.white,
+              ),
+            ),
+          ),
+          SizedBox(height: 5),
+          Text(
+            name,
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Text(
+            specialization,
+            style: TextStyle(
+              fontSize: 14,
+              color: Colors.grey,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class AppointmentCard extends StatelessWidget {
+  final String title;
+  final String doctor;
+
+  const AppointmentCard({
+    required this.title,
+    required this.doctor,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      child: ListTile(
+        leading: Icon(Icons.calendar_today),
+        title: Text(title),
+        subtitle: Text('Doctor: $doctor'),
+        trailing: Icon(Icons.arrow_forward),
+        onTap: () {},
       ),
     );
   }
