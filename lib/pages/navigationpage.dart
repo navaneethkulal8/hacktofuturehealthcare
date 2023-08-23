@@ -1,13 +1,26 @@
 import 'package:flutter/material.dart';
 
-class NotificationsPage extends StatefulWidget {
-  const NotificationsPage({super.key});
+class Medication {
+  final String name;
+  final String dose;
 
+  Medication(this.name, this.dose);
+}
+
+class NotificationsPage extends StatefulWidget {
   @override
   _NotificationsPageState createState() => _NotificationsPageState();
 }
 
 class _NotificationsPageState extends State<NotificationsPage> {
+  List<Medication> medications = [];
+
+  void addMedication(String name, String dose) {
+    setState(() {
+      medications.add(Medication(name, dose));
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,7 +56,10 @@ class _NotificationsPageState extends State<NotificationsPage> {
               const SizedBox(height: 10),
               Center(
                 child: ElevatedButton.icon(
-                  onPressed: () {},
+                  onPressed: () {
+                    // Temporary function call to add a medication
+                    addMedication('Medication Name', '1 pill');
+                  },
                   label: const Text('OK'),
                   icon: const Icon(Icons.check),
                   style: ElevatedButton.styleFrom(
@@ -52,95 +68,18 @@ class _NotificationsPageState extends State<NotificationsPage> {
                 ),
               ),
               const SizedBox(height: 20),
-              const Card(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    ListTile(
+              ListView.builder(
+                shrinkWrap: true,
+                itemCount: medications.length,
+                itemBuilder: (context, index) {
+                  return Card(
+                    child: ListTile(
                       leading: Icon(Icons.album),
-                      title: Text('Medication Name'),
-                      subtitle: Text('Dose: 1 pill'),
+                      title: Text(medications[index].name),
+                      subtitle: Text('Dose: ${medications[index].dose}'),
                     ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 10),
-              const Card(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    ListTile(
-                      leading: Icon(Icons.album),
-                      title: Text('Medication Name'),
-                      subtitle: Text('Dose: 1 pill'),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 10),
-              const Card(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    ListTile(
-                      leading: Icon(Icons.album),
-                      title: Text('Medication Name'),
-                      subtitle: Text('Dose: 1 pill'),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 10),
-              const Card(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    ListTile(
-                      leading: Icon(Icons.album),
-                      title: Text('Medication Name'),
-                      subtitle: Text('Dose: 1 pill'),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 10),
-              const Card(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    ListTile(
-                      leading: Icon(Icons.album),
-                      title: Text('Medication Name'),
-                      subtitle: Text('Dose: 1 pill'),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 10),
-              const Card(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    ListTile(
-                      leading: Icon(Icons.album),
-                      title: Text('Medication Name'),
-                      subtitle: Text('Dose: 1 pill'),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 10),
-              const Card(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    ListTile(
-                      leading: Icon(Icons.album),
-                      title: Text('Medication Name'),
-                      subtitle: Text('Dose: 1 pill'),
-                    ),
-                  ],
-                ),
+                  );
+                },
               ),
             ],
           ),

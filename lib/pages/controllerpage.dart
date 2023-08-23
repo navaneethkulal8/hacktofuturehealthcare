@@ -16,7 +16,7 @@ class _ControllerPageState extends State<ControllerPage> {
   final List<Widget> _pages = [
     HomePage(),
     const ExplorePage(),
-    const NotificationsPage(),
+    NotificationsPage(),
     const ProfilePage(),
   ];
 
