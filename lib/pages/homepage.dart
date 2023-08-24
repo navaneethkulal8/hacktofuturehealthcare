@@ -8,6 +8,13 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   bool _showYourUploads = true; // Track whether "Your Uploads" button is active
 
+  // Sample list of uploaded files with dummy image assets
+  List<Map<String, String>> uploadedFiles = [
+    {'name': 'File 1.pdf', 'asset': 'assets/pdf_icon.png'},
+    {'name': 'File 2.jpg', 'asset': 'assets/image_icon.png'},
+    // Add more files as needed
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,12 +31,11 @@ class _HomePageState extends State<HomePage> {
               decoration: InputDecoration(
                 hintText: 'Search records',
                 prefixIcon: Icon(Icons.search),
-                suffixIcon: Icon(Icons.filter_list), // Add filter icon
+                suffixIcon: Icon(Icons.filter_list),
                 border: OutlineInputBorder(),
               ),
             ),
-            SizedBox(
-                height: 10), // Add some spacing between search bar and buttons
+            SizedBox(height: 10),
             Row(
               children: [
                 Expanded(
@@ -40,10 +46,9 @@ class _HomePageState extends State<HomePage> {
                       });
                     },
                     child: Container(
-                      height: 40, // Adjust height to your preference
+                      height: 40,
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(
-                            20.0), // Button-specific border radius
+                        borderRadius: BorderRadius.circular(20.0),
                         color: _showYourUploads ? Colors.blue : Colors.white,
                       ),
                       child: Center(
@@ -58,7 +63,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                 ),
-                SizedBox(width: 10), // Add spacing between buttons
+                SizedBox(width: 10),
                 Expanded(
                   child: GestureDetector(
                     onTap: () {
@@ -67,10 +72,9 @@ class _HomePageState extends State<HomePage> {
                       });
                     },
                     child: Container(
-                      height: 40, // Adjust height to your preference
+                      height: 40,
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(
-                            20.0), // Button-specific border radius
+                        borderRadius: BorderRadius.circular(20.0),
                         color: !_showYourUploads ? Colors.blue : Colors.white,
                       ),
                       child: Center(
@@ -90,15 +94,23 @@ class _HomePageState extends State<HomePage> {
             SizedBox(height: 20),
             Expanded(
               child: ListView.builder(
-                itemCount: 0, // Replace with actual list size
+                itemCount: uploadedFiles.length,
                 itemBuilder: (context, index) {
                   return Card(
                     child: ListTile(
                       leading: Icon(Icons.file_upload),
-                      title: Text('Medical File $index'),
+                      title: Text(uploadedFiles[index]['name']),
                       subtitle: Text('Uploaded: ${DateTime.now()}'),
                       onTap: () {
-                        // Implement file details screen or other actions here
+                        // Navigate to the file preview screen
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => FilePreviewScreen(
+                              assetPath: uploadedFiles[index]['asset'],
+                            ),
+                          ),
+                        );
                       },
                     ),
                   );
@@ -114,6 +126,25 @@ class _HomePageState extends State<HomePage> {
         },
         child: Icon(Icons.add),
         backgroundColor: Colors.blue,
+      ),
+    );
+  }
+}
+
+class FilePreviewScreen extends StatelessWidget {
+  final String assetPath;
+
+  FilePreviewScreen({required this.assetPath});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('File Preview'),
+        backgroundColor: Colors.blue,
+      ),
+      body: Center(
+        child: Image.asset(assetPath), // Display image preview
       ),
     );
   }
