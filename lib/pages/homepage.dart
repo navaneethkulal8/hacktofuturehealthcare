@@ -99,18 +99,18 @@ class _HomePageState extends State<HomePage> {
                   return Card(
                     child: ListTile(
                       leading: Icon(Icons.file_upload),
-                      title: Text(uploadedFiles[index]['name']),
+                      // title: Text(uploadedFiles[index]['name']),
                       subtitle: Text('Uploaded: ${DateTime.now()}'),
                       onTap: () {
                         // Navigate to the file preview screen
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => FilePreviewScreen(
-                              assetPath: uploadedFiles[index]['asset'],
-                            ),
-                          ),
-                        );
+                        // Navigator.push(
+                        //   context,
+                        //   MaterialPageRoute(
+                        //     builder: (context) => FilePreviewScreen(
+                        //       // assetPath: uploadedFiles[index]['asset'],
+                        //     ),
+                        //   ),
+                        // );
                       },
                     ),
                   );
