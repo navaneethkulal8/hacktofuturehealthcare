@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 
+void main() {
+  runApp(ProfilePage());
+}
+
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
 
@@ -128,44 +132,43 @@ class _ProfilePageState extends State<ProfilePage> {
       spacing: 16.0,
       runSpacing: 16.0,
       children: days.map((day) {
-        return SizedBox(
-          width: MediaQuery.of(context).size.width / 2 - 24,
-          child: Card(
-            elevation: 4,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    day,
-                    style: TextStyle(
-                      fontSize: 18.0,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const SizedBox(height: 8.0),
-                  Text(
-                    selectedDay == day
-                        ? selectedSubtitle.isNotEmpty
-                            ? selectedSubtitle
-                            : 'Diet plan for $selectedDay'
-                        : 'Diet plan for $day',
-                    style: TextStyle(
-                      fontSize: 14.0,
-                      color: Colors.grey.shade700,
-                    ),
-                  ),
-                  const SizedBox(height: 16.0),
-                  Checkbox(
+        return Card(
+          elevation: 4,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Align(
+                  alignment: Alignment.topRight,
+                  child: Checkbox(
                     value: false,
                     onChanged: (bool? value) {},
                   ),
-                ],
-              ),
+                ),
+                Text(
+                  day,
+                  style: TextStyle(
+                    fontSize: 18.0,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(height: 8.0),
+                Text(
+                  selectedDay == day
+                      ? selectedSubtitle.isNotEmpty
+                          ? selectedSubtitle
+                          : 'Diet plan for $selectedDay'
+                      : 'Diet plan for $day',
+                  style: TextStyle(
+                    fontSize: 14.0,
+                    color: Colors.grey.shade700,
+                  ),
+                ),
+              ],
             ),
           ),
         );
