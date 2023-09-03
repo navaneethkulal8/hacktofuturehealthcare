@@ -139,16 +139,8 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
           child: Padding(
             padding: const EdgeInsets.all(16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            child: Row(
               children: [
-                Align(
-                  alignment: Alignment.topRight,
-                  child: Checkbox(
-                    value: false,
-                    onChanged: (bool? value) {},
-                  ),
-                ),
                 Text(
                   day,
                   style: TextStyle(
@@ -156,7 +148,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                const SizedBox(height: 8.0),
+                SizedBox(width: 8.0), // Add spacing between day and checkbox
                 Text(
                   selectedDay == day
                       ? selectedSubtitle.isNotEmpty
@@ -167,6 +159,11 @@ class _ProfilePageState extends State<ProfilePage> {
                     fontSize: 14.0,
                     color: Colors.grey.shade700,
                   ),
+                ),
+                Spacer(),
+                Checkbox(
+                  value: false,
+                  onChanged: (bool? value) {},
                 ),
               ],
             ),
