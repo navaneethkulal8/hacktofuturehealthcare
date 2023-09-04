@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gomedic/pages/explorepage.dart';
 import 'package:gomedic/pages/homepage.dart';
 import 'package:gomedic/pages/navigationpage.dart';
-import 'package:gomedic/pages/profilepage.dart';
+import 'package:gomedic/pages/profilepage.dart'; // Import the DietPage
 
 class ControllerPage extends StatefulWidget {
   const ControllerPage({Key? key}) : super(key: key);
@@ -17,7 +17,7 @@ class _ControllerPageState extends State<ControllerPage> {
     HomePage(),
     const ExplorePage(),
     NotificationsPage(),
-    const ProfilePage(),
+    const ProfilePage(), // Use DietPage instead of ProfilePage
   ];
 
   @override
@@ -45,9 +45,11 @@ class _ControllerPageState extends State<ControllerPage> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               buildNavItem(Icons.home, "Home", 0),
-              buildNavItem(Icons.calendar_today, "Calendar", 1),
+              buildNavItem(Icons.calendar_today, "Appointment",
+                  1), // Change "Calendar" to "Appointments"
               buildNavItem(Icons.medication, "Medication", 2),
-              buildNavItem(Icons.person, "Profile", 3),
+              buildNavItem(
+                  Icons.restaurant_menu, "Diet", 3), // Use Diet icon and label
             ],
           ),
         ),
@@ -81,8 +83,8 @@ class _ControllerPageState extends State<ControllerPage> {
               style: TextStyle(
                 color: isSelected ? Colors.black : Colors.grey,
                 fontWeight: FontWeight.bold,
-                fontSize: 10, // Adjust the font size
-                height: 1, // Adjust the line height
+                fontSize: 10,
+                height: 1,
               ),
             ),
           ],
