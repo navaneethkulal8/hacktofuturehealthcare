@@ -45,8 +45,7 @@ class _ControllerPageState extends State<ControllerPage> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               buildNavItem(Icons.home, "Home", 0),
-              buildNavItem(Icons.calendar_today, "Appointment",
-                  1), // Change "Calendar" to "Appointments"
+              buildNavItem(Icons.calendar_today, "Appointment", 1),
               buildNavItem(Icons.medication, "Medication", 2),
               buildNavItem(
                   Icons.restaurant_menu, "Diet", 3), // Use Diet icon and label
