@@ -113,8 +113,8 @@ class _ProfilePageState extends State<ProfilePage> {
             ElevatedButton(
               onPressed: _changeSubtitle,
               style: ElevatedButton.styleFrom(
-                primary: Colors.green,
-                onPrimary: Colors.white,
+                backgroundColor: Colors.green,
+                foregroundColor: Colors.white,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8),
                 ),
@@ -128,49 +128,49 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   Widget _buildDayCards() {
-    return Wrap(
-      spacing: 16.0,
-      runSpacing: 16.0,
+    return Row(
       children: days.map((day) {
-        return Card(
-          elevation: 4,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  children: [
-                    Text(
-                      day,
-                      style: TextStyle(
-                        fontSize: 18.0,
-                        fontWeight: FontWeight.bold,
+        return Expanded(
+          child: Card(
+            elevation: 4,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Text(
+                        day,
+                        style: TextStyle(
+                          fontSize: 18.0,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
-                    ),
-                    Spacer(), // Add spacing between day and checkbox
-                    Checkbox(
-                      value: false,
-                      onChanged: (bool? value) {},
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 8.0),
-                Text(
-                  selectedDay == day
-                      ? selectedSubtitle.isNotEmpty
-                          ? selectedSubtitle
-                          : 'Diet plan for $selectedDay'
-                      : 'Diet plan for $day',
-                  style: TextStyle(
-                    fontSize: 14.0,
-                    color: Colors.grey.shade700,
+                      Spacer(),
+                      Checkbox(
+                        value: false,
+                        onChanged: (bool? value) {},
+                      ),
+                    ],
                   ),
-                ),
-              ],
+                  const SizedBox(height: 8.0),
+                  Text(
+                    selectedDay == day
+                        ? selectedSubtitle.isNotEmpty
+                            ? selectedSubtitle
+                            : 'Diet plan for $selectedDay'
+                        : 'Diet plan for $day',
+                    style: TextStyle(
+                      fontSize: 14.0,
+                      color: Colors.grey.shade700,
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         );
