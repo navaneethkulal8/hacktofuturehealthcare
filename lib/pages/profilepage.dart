@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(ProfilePage());
-}
-
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
 
@@ -128,53 +124,66 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   Widget _buildDayCards() {
-    return Row(
+    return Column(
+      crossAxisAlignment:
+          CrossAxisAlignment.stretch, // Ensure cards take the full width
       children: days.map((day) {
-        return Expanded(
-          child: Card(
-            elevation: 4,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      Text(
-                        day,
-                        style: TextStyle(
-                          fontSize: 18.0,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      Spacer(),
-                      Checkbox(
-                        value: false,
-                        onChanged: (bool? value) {},
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 8.0),
-                  Text(
-                    selectedDay == day
-                        ? selectedSubtitle.isNotEmpty
-                            ? selectedSubtitle
-                            : 'Diet plan for $selectedDay'
-                        : 'Diet plan for $day',
-                    style: TextStyle(
-                      fontSize: 14.0,
-                      color: Colors.grey.shade700,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
+        return Padding(
+          padding: const EdgeInsets.only(bottom: 16.0),
+          child: _buildDayCard(day),
         );
       }).toList(),
     );
   }
+
+  Widget _buildDayCard(String day) {
+    return Card(
+      elevation: 4,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Text(
+                  day,
+                  style: TextStyle(
+                    fontSize: 18.0,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Spacer(),
+                Checkbox(
+                  value: false,
+                  onChanged: (bool? value) {},
+                ),
+              ],
+            ),
+            const SizedBox(height: 8.0),
+            Expanded(
+              child: Text(
+                selectedDay == day
+                    ? selectedSubtitle.isNotEmpty
+                        ? selectedSubtitle
+                        : 'Diet plan for $selectedDay'
+                    : 'Diet plan for $day',
+                style: TextStyle(
+                  fontSize: 14.0,
+                  color: Colors.grey.shade700,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+void main() {
+  runApp(ProfilePage());
 }
