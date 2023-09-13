@@ -53,6 +53,8 @@ class _ProfilePageState extends State<ProfilePage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               _buildDietContainer(),
+              const SizedBox(height: 20),
+              _buildDayTiles(),
             ],
           ),
         ),
@@ -118,6 +120,23 @@ class _ProfilePageState extends State<ProfilePage> {
           ],
         ),
       ),
+    );
+  }
+
+  Widget _buildDayTiles() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: days.map((day) {
+        return ListTile(
+          title: Text(day),
+          subtitle: Text(day == selectedDay ? selectedSubtitle : ''),
+          onTap: () {
+            setState(() {
+              selectedDay = day;
+            });
+          },
+        );
+      }).toList(),
     );
   }
 }
