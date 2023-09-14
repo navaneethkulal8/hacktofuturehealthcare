@@ -127,9 +127,13 @@ class _ProfilePageState extends State<ProfilePage> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: days.map((day) {
+        final bool isSelectedDay = day == selectedDay;
+        final String dietDescription =
+            isSelectedDay ? selectedSubtitle : 'No diet description available';
+
         return ListTile(
           title: Text(day),
-          subtitle: Text(day == selectedDay ? selectedSubtitle : ''),
+          subtitle: Text(dietDescription),
           onTap: () {
             setState(() {
               selectedDay = day;
