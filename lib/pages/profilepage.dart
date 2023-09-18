@@ -131,14 +131,29 @@ class _ProfilePageState extends State<ProfilePage> {
         final String dietDescription =
             isSelectedDay ? selectedSubtitle : 'No diet description available';
 
-        return ListTile(
-          title: Text(day),
-          subtitle: Text(dietDescription),
-          onTap: () {
-            setState(() {
-              selectedDay = day;
-            });
-          },
+        return Card(
+          elevation: isSelectedDay ? 8 : 2,
+          margin: EdgeInsets.symmetric(vertical: 8),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: ListTile(
+            title: Text(
+              day,
+              style: TextStyle(
+                fontWeight: isSelectedDay ? FontWeight.bold : FontWeight.normal,
+              ),
+            ),
+            subtitle: Text(
+              dietDescription,
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+            onTap: () {
+              setState(() {
+                selectedDay = day;
+              });
+            },
+          ),
         );
       }).toList(),
     );
