@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'package:intl/intl.dart'; // Import the intl package for DateFormat
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -10,15 +11,11 @@ class ProfilePage extends StatefulWidget {
 
 class DietPlan {
   final String day;
-  final String morningDiet;
-  final String eveningDiet;
-  final String nightDiet;
+  final String dietDescription;
 
   DietPlan({
     required this.day,
-    required this.morningDiet,
-    required this.eveningDiet,
-    required this.nightDiet,
+    required this.dietDescription,
   });
 }
 
@@ -34,14 +31,19 @@ class _ProfilePageState extends State<ProfilePage> {
   ];
 
   String selectedDay = '';
-  String selectedSubtitle = '';
-  String morningDiet = '';
-  String eveningDiet = '';
-  String nightDiet = '';
+  String selectedDietDescription = '';
 
   CalendarFormat _calendarFormat = CalendarFormat.month;
   DateTime _focusedDay = DateTime.now();
   DateTime _selectedDay = DateTime.now();
+
+  // Define a list of DietPlan objects to store diet information for each day.
+  List<DietPlan> dietPlans = [
+    DietPlan(day: 'Monday', dietDescription: 'Healthy diet for Monday'),
+    DietPlan(day: 'Tuesday', dietDescription: 'Nutritious diet for Tuesday'),
+    DietPlan(day: 'Wednesday', dietDescription: 'Balanced diet for Wednesday'),
+    // Add diet plans for other days here
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -69,7 +71,13 @@ class _ProfilePageState extends State<ProfilePage> {
                   setState(() {
                     _selectedDay = selectedDay;
                     _focusedDay = focusedDay;
-                    // Implement logic to update your diet information based on the selected day.
+                    // Find the corresponding diet plan for the selected day.
+                    DietPlan? selectedPlan = dietPlans.firstWhere(
+                      (plan) =>
+                          plan.day == DateFormat('EEEE').format(selectedDay),
+                      orElse: () => DietPlan(day: '', dietDescription: ''),
+                    );
+                    selectedDietDescription = selectedPlan.dietDescription;
                   });
                 },
                 calendarBuilders: CalendarBuilders(
@@ -88,7 +96,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
               ),
               const SizedBox(height: 20),
-              _buildDayTiles(),
+              _buildDayTile(),
             ],
           ),
         ),
@@ -96,43 +104,31 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
-  Widget _buildDayTiles() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: days.map((day) {
-        final bool isSelectedDay = day == selectedDay;
-
-        return Card(
-          elevation: isSelectedDay ? 8 : 2,
-          margin: EdgeInsets.symmetric(vertical: 8),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8),
+  Widget _buildDayTile() {
+    return Card(
+      elevation: 2,
+      margin: EdgeInsets.symmetric(vertical: 8),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: ListTile(
+        title: Text(
+          'Today\'s Diet - $selectedDay',
+          style: TextStyle(
+            fontWeight: FontWeight.normal,
           ),
-          child: ListTile(
-            title: Text(
-              'Today\'s Diet - $day',
-              style: TextStyle(
-                fontWeight: isSelectedDay ? FontWeight.bold : FontWeight.normal,
-              ),
-            ),
-            subtitle: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text('Diet Description: $selectedSubtitle'),
-                Text('Morning Diet: $morningDiet'),
-                Text('Evening Diet: $eveningDiet'),
-                Text('Night Diet: $nightDiet'),
-              ],
-            ),
-            onTap: () {
-              setState(() {
-                selectedDay = day;
-                // Implement logic to update the selected diet information based on the selected day.
-              });
-            },
-          ),
-        );
-      }).toList(),
+        ),
+        subtitle: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text('Diet Description: $selectedDietDescription'),
+          ],
+        ),
+      ),
     );
   }
+}
+
+void main() {
+  runApp(ProfilePage());
 }
