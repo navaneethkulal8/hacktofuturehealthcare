@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
-import 'package:intl/intl.dart'; // Import the intl package for DateFormat
+import 'package:intl/intl.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -37,12 +37,15 @@ class _ProfilePageState extends State<ProfilePage> {
   DateTime _focusedDay = DateTime.now();
   DateTime _selectedDay = DateTime.now();
 
-  // Define a list of DietPlan objects to store diet information for each day.
   List<DietPlan> dietPlans = [
     DietPlan(day: 'Monday', dietDescription: 'Healthy diet for Monday'),
     DietPlan(day: 'Tuesday', dietDescription: 'Nutritious diet for Tuesday'),
     DietPlan(day: 'Wednesday', dietDescription: 'Balanced diet for Wednesday'),
-    // Add diet plans for other days here
+    DietPlan(
+        day: 'Thursday', dietDescription: 'Protein-rich diet for Thursday'),
+    DietPlan(day: 'Friday', dietDescription: 'Low-carb diet for Friday'),
+    DietPlan(day: 'Saturday', dietDescription: 'Veggie diet for Saturday'),
+    DietPlan(day: 'Sunday', dietDescription: 'Cheat day!'),
   ];
 
   @override
@@ -71,7 +74,6 @@ class _ProfilePageState extends State<ProfilePage> {
                   setState(() {
                     _selectedDay = selectedDay;
                     _focusedDay = focusedDay;
-                    // Find the corresponding diet plan for the selected day.
                     DietPlan? selectedPlan = dietPlans.firstWhere(
                       (plan) =>
                           plan.day == DateFormat('EEEE').format(selectedDay),
@@ -96,7 +98,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
               ),
               const SizedBox(height: 20),
-              _buildDayTile(),
+              _buildDayTiles(),
             ],
           ),
         ),
@@ -104,31 +106,42 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
-  Widget _buildDayTile() {
-    return Card(
-      elevation: 2,
-      margin: EdgeInsets.symmetric(vertical: 8),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: ListTile(
-        title: Text(
-          'Today\'s Diet - $selectedDay',
-          style: TextStyle(
-            fontWeight: FontWeight.normal,
+  Widget _buildDayTiles() {
+    List<Widget> dayTiles = [];
+
+    for (String day in days) {
+      DietPlan? selectedPlan = dietPlans.firstWhere(
+        (plan) => plan.day == day,
+        orElse: () => DietPlan(day: '', dietDescription: ''),
+      );
+
+      dayTiles.add(
+        Card(
+          elevation: 2,
+          margin: EdgeInsets.symmetric(vertical: 8),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: ListTile(
+            title: Text(
+              '$day\'s Diet',
+              style: TextStyle(
+                fontWeight: FontWeight.normal,
+              ),
+            ),
+            subtitle: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('Diet Description: ${selectedPlan.dietDescription}'),
+              ],
+            ),
           ),
         ),
-        subtitle: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text('Diet Description: $selectedDietDescription'),
-          ],
-        ),
-      ),
+      );
+    }
+
+    return Column(
+      children: dayTiles,
     );
   }
-}
-
-void main() {
-  runApp(ProfilePage());
 }
