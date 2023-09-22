@@ -56,6 +56,14 @@ class _ProfilePageState extends State<ProfilePage> {
         appBar: AppBar(
           title: const Text('Diet'),
           backgroundColor: Colors.green,
+          actions: [
+            IconButton(
+              icon: Icon(Icons.refresh),
+              onPressed: () {
+                _changeDietPlan();
+              },
+            ),
+          ],
         ),
         body: SingleChildScrollView(
           padding: const EdgeInsets.all(16.0),
@@ -104,6 +112,14 @@ class _ProfilePageState extends State<ProfilePage> {
         ),
       ),
     );
+  }
+
+  void _changeDietPlan() {
+    // Implement your logic here to change the diet plan.
+    // For example, you can randomly select a new plan.
+    setState(() {
+      // Update the selectedDietDescription here.
+    });
   }
 
   Widget _buildDayTiles() {
