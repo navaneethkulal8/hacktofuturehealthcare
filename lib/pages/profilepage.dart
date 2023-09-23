@@ -2,11 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:intl/intl.dart';
 
-class ProfilePage extends StatefulWidget {
-  const ProfilePage({Key? key}) : super(key: key);
+void main() {
+  runApp(ProfileApp());
+}
 
+class ProfileApp extends StatelessWidget {
   @override
-  _ProfilePageState createState() => _ProfilePageState();
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Diet',
+      home: ProfilePage(),
+    );
+  }
 }
 
 class DietPlan {
@@ -17,6 +24,13 @@ class DietPlan {
     required this.day,
     required this.dietDescription,
   });
+}
+
+class ProfilePage extends StatefulWidget {
+  const ProfilePage({Key? key}) : super(key: key);
+
+  @override
+  _ProfilePageState createState() => _ProfilePageState();
 }
 
 class _ProfilePageState extends State<ProfilePage> {
@@ -50,76 +64,123 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Diet',
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Diet'),
-          backgroundColor: Colors.green,
-          actions: [
-            IconButton(
-              icon: Icon(Icons.refresh),
-              onPressed: () {
-                _changeDietPlan();
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Diet'),
+        backgroundColor: Colors.green,
+      ),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            TableCalendar(
+              firstDay: DateTime.utc(2023, 1, 1),
+              lastDay: DateTime.utc(2023, 12, 31),
+              focusedDay: _focusedDay,
+              calendarFormat: _calendarFormat,
+              selectedDayPredicate: (day) {
+                return isSameDay(_selectedDay, day);
               },
+              onDaySelected: (selectedDay, focusedDay) {
+                setState(() {
+                  _selectedDay = selectedDay;
+                  _focusedDay = focusedDay;
+                  DietPlan? selectedPlan = dietPlans.firstWhere(
+                    (plan) =>
+                        plan.day == DateFormat('EEEE').format(selectedDay),
+                    orElse: () => DietPlan(day: '', dietDescription: ''),
+                  );
+                  selectedDietDescription = selectedPlan.dietDescription;
+                });
+              },
+              calendarBuilders: CalendarBuilders(
+                selectedBuilder: (context, date, events) => Container(
+                  margin: const EdgeInsets.all(4.0),
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    color: Colors.green,
+                    shape: BoxShape.circle,
+                  ),
+                  child: Text(
+                    date.day.toString(),
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+              ),
             ),
-          ],
-        ),
-        body: SingleChildScrollView(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              TableCalendar(
-                firstDay: DateTime.utc(2023, 1, 1),
-                lastDay: DateTime.utc(2023, 12, 31),
-                focusedDay: _focusedDay,
-                calendarFormat: _calendarFormat,
-                selectedDayPredicate: (day) {
-                  return isSameDay(_selectedDay, day);
-                },
-                onDaySelected: (selectedDay, focusedDay) {
-                  setState(() {
-                    _selectedDay = selectedDay;
-                    _focusedDay = focusedDay;
-                    DietPlan? selectedPlan = dietPlans.firstWhere(
-                      (plan) =>
-                          plan.day == DateFormat('EEEE').format(selectedDay),
-                      orElse: () => DietPlan(day: '', dietDescription: ''),
-                    );
-                    selectedDietDescription = selectedPlan.dietDescription;
-                  });
-                },
-                calendarBuilders: CalendarBuilders(
-                  selectedBuilder: (context, date, events) => Container(
-                    margin: const EdgeInsets.all(4.0),
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      color: Colors.green,
-                      shape: BoxShape.circle,
-                    ),
-                    child: Text(
-                      date.day.toString(),
-                      style: TextStyle(color: Colors.white),
+            const SizedBox(height: 20),
+            _buildDayTiles(),
+
+            // Center the "Edit" button in the middle of the screen with a background color
+            Center(
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.blue, // Set the background color here
+                  borderRadius:
+                      BorderRadius.circular(8), // Optional: Add rounded corners
+                ),
+                child: TextButton(
+                  onPressed: () {
+                    // Show a dialog for editing the diet plan
+                    _showEditDialog();
+                  },
+                  child: Text(
+                    "Edit",
+                    style: TextStyle(
+                      color: Colors.white, // Set text color for visibility
                     ),
                   ),
                 ),
               ),
-              const SizedBox(height: 20),
-              _buildDayTiles(),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
   }
 
-  void _changeDietPlan() {
-    // Implement your logic here to change the diet plan.
-    // For example, you can randomly select a new plan.
-    setState(() {
-      // Update the selectedDietDescription here.
-    });
+  void _showEditDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Edit Diet Plan'),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text('You can edit the diet plan here.'),
+              TextFormField(
+                decoration: InputDecoration(labelText: 'Diet Description'),
+                initialValue: selectedDietDescription,
+                onChanged: (newValue) {
+                  setState(() {
+                    selectedDietDescription = newValue;
+                  });
+                },
+              ),
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                // Handle save action here
+                // For example, update the diet plan.
+                Navigator.of(context).pop();
+              },
+              child: Text('Save'),
+            ),
+            TextButton(
+              onPressed: () {
+                // Handle cancel action here
+                Navigator.of(context).pop();
+              },
+              child: Text('Cancel'),
+            ),
+          ],
+        );
+      },
+    );
   }
 
   Widget _buildDayTiles() {
