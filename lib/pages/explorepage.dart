@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ExplorePage extends StatefulWidget {
-  const ExplorePage({super.key});
+  const ExplorePage({Key? key});
 
   @override
   _ExplorePageState createState() => _ExplorePageState();
@@ -54,9 +54,25 @@ class _ExplorePageState extends State<ExplorePage> {
                 child: Row(
                   children: [
                     DoctorAvatar(
-                        name: 'John Doe', specialization: 'Cardiologist'),
+                      name: 'John Doe',
+                      specialization: 'Cardiologist',
+                      onCallPressed: () {
+                        // Add your call functionality here
+                      },
+                      onMessagePressed: () {
+                        // Add your message functionality here
+                      },
+                    ),
                     DoctorAvatar(
-                        name: 'Jane Smith', specialization: 'Dermatologist'),
+                      name: 'Jane Smith',
+                      specialization: 'Dermatologist',
+                      onCallPressed: () {
+                        // Add your call functionality here
+                      },
+                      onMessagePressed: () {
+                        // Add your message functionality here
+                      },
+                    ),
                     // Add more DoctorAvatar widgets here as needed
                   ],
                 ),
@@ -84,47 +100,69 @@ class _ExplorePageState extends State<ExplorePage> {
 class DoctorAvatar extends StatelessWidget {
   final String name;
   final String specialization;
+  final VoidCallback? onCallPressed;
+  final VoidCallback? onMessagePressed;
 
   const DoctorAvatar({
     required this.name,
     required this.specialization,
+    this.onCallPressed,
+    this.onMessagePressed,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          SizedBox(height: 10), // Add space between title and avatar
-          CircleAvatar(
-            backgroundColor: Colors.blue,
-            radius: 30,
-            child: Text(
-              'DR',
-              style: TextStyle(
-                fontSize: 20,
-                color: Colors.white,
+    return Card(
+      elevation: 5, // Add elevation for a raised effect
+      margin: const EdgeInsets.symmetric(
+          horizontal: 10, vertical: 5), // Add margin for spacing
+      child: Padding(
+        padding: const EdgeInsets.all(10),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            CircleAvatar(
+              backgroundColor: Colors.blue,
+              radius: 30,
+              child: Text(
+                'DR',
+                style: TextStyle(
+                  fontSize: 20,
+                  color: Colors.white,
+                ),
               ),
             ),
-          ),
-          SizedBox(height: 5),
-          Text(
-            name,
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
+            SizedBox(height: 5),
+            Text(
+              name,
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+              ),
             ),
-          ),
-          Text(
-            specialization,
-            style: TextStyle(
-              fontSize: 14,
-              color: Colors.grey,
+            Text(
+              specialization,
+              style: TextStyle(
+                fontSize: 14,
+                color: Colors.grey,
+              ),
             ),
-          ),
-        ],
+            SizedBox(height: 10),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                IconButton(
+                  icon: Icon(Icons.phone),
+                  onPressed: onCallPressed,
+                ),
+                IconButton(
+                  icon: Icon(Icons.message),
+                  onPressed: onMessagePressed,
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -142,6 +180,9 @@ class AppointmentCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      elevation: 5, // Add elevation for a raised effect
+      margin: const EdgeInsets.symmetric(
+          horizontal: 10, vertical: 5), // Add margin for spacing
       child: ListTile(
         leading: Icon(Icons.calendar_today),
         title: Text(title),
