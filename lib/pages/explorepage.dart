@@ -112,10 +112,12 @@ class DoctorAvatar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 5, // Add elevation for a raised effect
-      margin: const EdgeInsets.symmetric(
-          horizontal: 10, vertical: 5), // Add margin for spacing
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.grey),
+        borderRadius: BorderRadius.circular(10),
+      ),
       child: Padding(
         padding: const EdgeInsets.all(10),
         child: Column(
@@ -152,11 +154,13 @@ class DoctorAvatar extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 IconButton(
-                  icon: Icon(Icons.phone),
+                  icon: Icon(Icons.phone,
+                      color: Colors.blue), // Add color to phone icon
                   onPressed: onCallPressed,
                 ),
                 IconButton(
-                  icon: Icon(Icons.message),
+                  icon: Icon(Icons.message,
+                      color: Colors.blue), // Add color to message icon
                   onPressed: onMessagePressed,
                 ),
               ],
@@ -179,10 +183,12 @@ class AppointmentCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 5, // Add elevation for a raised effect
-      margin: const EdgeInsets.symmetric(
-          horizontal: 10, vertical: 5), // Add margin for spacing
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.grey),
+        borderRadius: BorderRadius.circular(10),
+      ),
       child: ListTile(
         leading: Icon(Icons.calendar_today),
         title: Text(title),
