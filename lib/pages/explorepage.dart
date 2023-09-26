@@ -1,7 +1,20 @@
 import 'package:flutter/material.dart';
 
+void main() {
+  runApp(ExplorePageApp());
+}
+
+class ExplorePageApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: ExplorePage(),
+    );
+  }
+}
+
 class ExplorePage extends StatefulWidget {
-  const ExplorePage({Key? key});
+  const ExplorePage({Key? key}) : super(key: key);
 
   @override
   _ExplorePageState createState() => _ExplorePageState();
@@ -10,87 +23,81 @@ class ExplorePage extends StatefulWidget {
 class _ExplorePageState extends State<ExplorePage> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Appointment',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Appointment'),
       ),
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Appointment'),
-        ),
-        body: SingleChildScrollView(
-          padding: const EdgeInsets.all(20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // Search Bar with Filter Icon
-              Padding(
-                padding: const EdgeInsets.only(bottom: 10),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: TextFormField(
-                        decoration: InputDecoration(
-                          hintText: 'Search for doctors...',
-                          prefixIcon: Icon(Icons.search),
-                          suffixIcon: Icon(Icons.filter_list),
-                          border: OutlineInputBorder(),
-                        ),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Search Bar with Filter Icon
+            Padding(
+              padding: const EdgeInsets.only(bottom: 10),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: TextFormField(
+                      decoration: InputDecoration(
+                        hintText: 'Search for doctors...',
+                        prefixIcon: Icon(Icons.search),
+                        suffixIcon: Icon(Icons.filter_list),
+                        border: OutlineInputBorder(),
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-              const SizedBox(height: 10),
-              // Previously Consulted Doctors
-              Text(
-                'Your Previous Doctors',
-                style: TextStyle(fontSize: 18),
+            ),
+            const SizedBox(height: 10),
+            // Previously Consulted Doctors
+            Text(
+              'Your Previous Doctors',
+              style: TextStyle(fontSize: 18),
+            ),
+            const SizedBox(height: 5), // Add space between title and avatars
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: [
+                  DoctorAvatar(
+                    name: 'John Doe',
+                    specialization: 'Cardiologist',
+                    onCallPressed: () {
+                      // Add your call functionality here
+                    },
+                    onMessagePressed: () {
+                      // Add your message functionality here
+                    },
+                  ),
+                  DoctorAvatar(
+                    name: 'Jane Smith',
+                    specialization: 'Dermatologist',
+                    onCallPressed: () {
+                      // Add your call functionality here
+                    },
+                    onMessagePressed: () {
+                      // Add your message functionality here
+                    },
+                  ),
+                  // Add more DoctorAvatar widgets here as needed
+                ],
               ),
-              const SizedBox(height: 5), // Add space between title and avatars
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: [
-                    DoctorAvatar(
-                      name: 'John Doe',
-                      specialization: 'Cardiologist',
-                      onCallPressed: () {
-                        // Add your call functionality here
-                      },
-                      onMessagePressed: () {
-                        // Add your message functionality here
-                      },
-                    ),
-                    DoctorAvatar(
-                      name: 'Jane Smith',
-                      specialization: 'Dermatologist',
-                      onCallPressed: () {
-                        // Add your call functionality here
-                      },
-                      onMessagePressed: () {
-                        // Add your message functionality here
-                      },
-                    ),
-                    // Add more DoctorAvatar widgets here as needed
-                  ],
-                ),
-              ),
-              const SizedBox(height: 20),
-              // Your Appointments
-              Text(
-                'Your Appointments',
-                style: TextStyle(fontSize: 18),
-              ),
-              const SizedBox(height: 10),
-              AppointmentCard(title: 'Appointment 1', doctor: 'John Doe'),
-              const SizedBox(height: 10),
-              AppointmentCard(title: 'Appointment 2', doctor: 'Jane Smith'),
-              const SizedBox(height: 10),
-              AppointmentCard(title: 'Appointment 3', doctor: 'John Doe'),
-            ],
-          ),
+            ),
+            const SizedBox(height: 20),
+            // Your Appointments
+            Text(
+              'Your Appointments',
+              style: TextStyle(fontSize: 18),
+            ),
+            const SizedBox(height: 10),
+            AppointmentCard(title: 'Appointment 1', doctor: 'John Doe'),
+            const SizedBox(height: 10),
+            AppointmentCard(title: 'Appointment 2', doctor: 'Jane Smith'),
+            const SizedBox(height: 10),
+            AppointmentCard(title: 'Appointment 3', doctor: 'John Doe'),
+          ],
         ),
       ),
     );
@@ -102,12 +109,16 @@ class DoctorAvatar extends StatelessWidget {
   final String specialization;
   final VoidCallback? onCallPressed;
   final VoidCallback? onMessagePressed;
+  final Color callIconColor; // Color for the call icon
+  final Color messageIconColor; // Color for the message icon
 
   const DoctorAvatar({
     required this.name,
     required this.specialization,
     this.onCallPressed,
     this.onMessagePressed,
+    this.callIconColor = Colors.blue, // Default color for call icon
+    this.messageIconColor = Colors.blue, // Default color for message icon
   });
 
   @override
@@ -154,13 +165,11 @@ class DoctorAvatar extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 IconButton(
-                  icon: Icon(Icons.phone,
-                      color: Colors.blue), // Add color to phone icon
+                  icon: Icon(Icons.phone, color: callIconColor),
                   onPressed: onCallPressed,
                 ),
                 IconButton(
-                  icon: Icon(Icons.message,
-                      color: Colors.blue), // Add color to message icon
+                  icon: Icon(Icons.message, color: messageIconColor),
                   onPressed: onMessagePressed,
                 ),
               ],
