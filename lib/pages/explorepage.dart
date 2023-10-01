@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(ExplorePageApp());
-}
-
 class ExplorePageApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -117,8 +113,8 @@ class DoctorAvatar extends StatelessWidget {
     required this.specialization,
     this.onCallPressed,
     this.onMessagePressed,
-    this.callIconColor = Colors.blue, // Default color for call icon
-    this.messageIconColor = Colors.blue, // Default color for message icon
+    this.callIconColor = Colors.blue,
+    this.messageIconColor = Colors.green,
   });
 
   @override
@@ -164,13 +160,26 @@ class DoctorAvatar extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                IconButton(
-                  icon: Icon(Icons.phone, color: callIconColor),
-                  onPressed: onCallPressed,
+                Container(
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Colors.white,
+                  ),
+                  child: IconButton(
+                    icon: Icon(Icons.phone, color: callIconColor),
+                    onPressed: onCallPressed,
+                  ),
                 ),
-                IconButton(
-                  icon: Icon(Icons.message, color: messageIconColor),
-                  onPressed: onMessagePressed,
+                SizedBox(width: 10), // Add spacing between icons
+                Container(
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Colors.white,
+                  ),
+                  child: IconButton(
+                    icon: Icon(Icons.message, color: messageIconColor),
+                    onPressed: onMessagePressed,
+                  ),
                 ),
               ],
             ),
