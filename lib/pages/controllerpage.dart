@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gomedic/pages/explorepage.dart';
+import 'package:gomedic/pages/appointmentpage.dart';
 import 'package:gomedic/pages/homepage.dart';
 import 'package:gomedic/pages/navigationpage.dart';
 import 'package:gomedic/pages/profilepage.dart'; // Import the DietPage
@@ -15,7 +15,7 @@ class _ControllerPageState extends State<ControllerPage> {
   int _currentIndex = 0;
   final List<Widget> _pages = [
     HomePage(),
-    const ExplorePage(),
+    const Appointmentpage(),
     NotificationsPage(),
     const ProfilePage(), // Use DietPage instead of ProfilePage
   ];

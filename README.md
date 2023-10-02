@@ -30,8 +30,8 @@ Make sure
 Flutter and Firebase
 
 ## ScreenShort
-<img src="images/homepage.png" alt="Home page" width="300px" style="margin-right: 20px;">
-<img src="images/Appointment.png" alt="Appointment page" width="300px" style="margin-right: 20px;">
-<img src="images/medication.png" alt="Medication" width="300px" style="margin-right: 20px;">
-<img src="images/diet.png" alt="Diet page" width="300px" style="margin-right: 20px;">
+<img src="Screeshorts/homepage.png" alt="Home page" width="300px" style="margin-right: 20px;">
+<img src="Screenshots/Appointment.png" alt="Appointment page" width="300px" style="margin-right: 20px;">
+<img src="Screenshots/medication.png" alt="Medication" width="300px" style="margin-right: 20px;">
+<img src="Screenshots/diet.png" alt="Diet page" width="300px" style="margin-right: 20px;">
 

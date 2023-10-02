@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:gomedic/pages/createaccount.dart';
+import 'package:gomedic/pages/Login/createaccount.dart';
 import 'package:gomedic/pages/controllerpage.dart';
 
 class LoginPage extends StatefulWidget {
@@ -80,7 +80,8 @@ class _LoginPageState extends State<LoginPage> {
       });
 
       try {
-        UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+        UserCredential userCredential =
+            await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: email,
           password: password,
         );

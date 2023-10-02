@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
 
-class ExplorePageApp extends StatelessWidget {
+class AppointmentpageApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: ExplorePage(),
+      home: Appointmentpage(),
     );
   }
 }
 
-class ExplorePage extends StatefulWidget {
-  const ExplorePage({Key? key}) : super(key: key);
+class Appointmentpage extends StatefulWidget {
+  const Appointmentpage({Key? key}) : super(key: key);
 
   @override
-  _ExplorePageState createState() => _ExplorePageState();
+  _AppointmentpageState createState() => _AppointmentpageState();
 }
 
-class _ExplorePageState extends State<ExplorePage> {
+class _AppointmentpageState extends State<Appointmentpage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

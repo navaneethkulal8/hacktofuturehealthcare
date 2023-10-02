@@ -1,8 +1,4 @@
 import 'package:flutter/material.dart';
-// import 'package:firebase_auth/firebase_auth.dart';
-// import 'package:gomedic/pages/controllerpage.dart';
-// import 'package:gomedic/pages/loginpage.dart';
-// import 'package:gomedic/pages/createaccount.dart';
 import 'package:gomedic/pages/controllerpage.dart';
 
 void main() {
